@@ -1,0 +1,20 @@
+{
+  "name": "draad-js",
+  "version": "1.0.1",
+  "description": "Pure JS(ES6 and ES5) plugin for line(SVG) connecting elements in DOM.",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "Tomislav Jezidžić",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0"
+  }
+}

@@ -1,3 +1,12 @@
+/*
+ * DraadJS v 1.0.1
+ * Author: Tomislav Jezidžić
+ * Repo: https://github.com/tomislavjezidzic/draad
+ *
+ * Year: 2018
+ */
+
+
 export default class Draad {
     /**
      * @param {string} element
