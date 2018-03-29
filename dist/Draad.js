@@ -31,27 +31,58 @@ var Draad = function () {
      * @param {string} options.dasharray
      * @param {string} options.cap
      * @param {boolean} options.responsive
+     * @param {number} options.wait
      */
     function Draad(element) {
+        var _this = this;
+
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
         _classCallCheck(this, Draad);
 
-        this.element = element;
-        this.parent = this.findAncestor(document.getElementsByClassName(element)[0], options.parentClass) || document.getElementsByTagName('body')[0];
-        this.smoothing = options.smoothing;
-        this.offsetX = options.offsetX;
-        this.offsetY = options.offsetY;
-        this.fill = options.fill;
-        this.color = options.color;
-        this.lineWidth = options.lineWidth;
-        this.lineOpacity = options.lineOpacity;
-        this.dasharray = options.dasharray;
-        this.cap = options.cap;
-        this.responsive = options.responsive;
-        this.options = options;
+        var _defaults = {
+            element: '',
+            parentClass: '',
+            offsetX: '',
+            offsetY: '',
+            fill: '',
+            color: '',
+            lineWidth: '',
+            lineOpacity: '',
+            dasharray: '',
+            cap: '',
+            responsive: '',
+            options: '',
+            wait: 0,
+            smoothing: 0.2
+        };
 
-        this.init();
+        this.defaults = Object.assign({}, _defaults, options);
+
+        this.element = element;
+        this.parent = function () {
+            if (_this.defaults.parentClass.length < 1) {
+                return document.getElementsByTagName('body')[0];
+            } else {
+                return _this.findAncestor(document.getElementsByClassName(element)[0], _this.defaults.parentClass);
+            }
+        };
+
+        this.smoothing = this.defaults.smoothing;
+        this.offsetX = this.defaults.offsetX;
+        this.offsetY = this.defaults.offsetY;
+        this.fill = this.defaults.fill;
+        this.color = this.defaults.color;
+        this.lineWidth = this.defaults.lineWidth;
+        this.lineOpacity = this.defaults.lineOpacity;
+        this.dasharray = this.defaults.dasharray;
+        this.cap = this.defaults.cap;
+        this.responsive = this.defaults.responsive;
+        this.options = this.defaults;
+
+        setTimeout(function () {
+            _this.init();
+        }, this.defaults.wait);
     }
 
     /**
@@ -64,7 +95,7 @@ var Draad = function () {
     _createClass(Draad, [{
         key: 'findAncestor',
         value: function findAncestor(element, cls) {
-            while ((element = element.parentElement) && !element.classList.contains(cls)) {
+            while ((element = element.parentElement) && element.classList.contains(cls)) {
                 return element;
             }
         }
@@ -81,14 +112,19 @@ var Draad = function () {
             var points = [];
             var offsetX = this.offsetX;
             var offsetY = this.offsetY;
+            var body = document.body;
+            var docEl = document.documentElement;
+            var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+            var clientTop = docEl.clientTop || body.clientTop || 0;
 
-            if (this.parent === document.getElementsByTagName('body')[0]) {
+            if (this.parent() === document.getElementsByTagName('body')[0]) {
                 for (var i = 0; i < dots.length; i++) {
                     var currentDot = document.getElementsByClassName(this.element)[i];
+                    var top = currentDot.getBoundingClientRect().top + scrollTop - clientTop;
                     var sampleDotOffsetX = offsetX || currentDot.offsetWidth / 2;
                     var sampleDotOffsetY = offsetY || currentDot.offsetHeight / 2;
                     var currentDotX = parseInt(currentDot.getBoundingClientRect().left + sampleDotOffsetX, 10);
-                    var currentDotY = parseInt(currentDot.getBoundingClientRect().top + sampleDotOffsetY, 10);
+                    var currentDotY = parseInt(Math.round(top) + sampleDotOffsetY, 10);
                     points.push([currentDotX, currentDotY]);
                 }
             } else {
@@ -112,8 +148,8 @@ var Draad = function () {
     }, {
         key: 'connectingMagic',
         value: function connectingMagic(points) {
-            var smoothing = this.smoothing || 0.2;
-            var svgParent = this.parent;
+            var smoothing = this.smoothing;
+            var svgParent = this.parent();
 
             var line = function line(pointA, pointB) {
                 var lengthX = pointB[0] - pointA[0];
@@ -170,6 +206,10 @@ var Draad = function () {
                 return dAttr;
             };
 
+            var pointsLength = points.length;
+            var firstPoint = points[0][1];
+            var lastPoint = points[pointsLength - 1][1];
+
             var xmlns = "http://www.w3.org/2000/svg";
             var svgEl = document.createElementNS(xmlns, "svg");
             svgEl.setAttribute('class', 'draad-line draad-line--' + this.element);
@@ -188,7 +228,7 @@ var Draad = function () {
 
             path.setAttribute("style", 'fill: ' + fill + '; ' + ('stroke: ' + lineColor + '; ') + ('stroke-width: ' + lineWidth + ';') + ('stroke-opacity: ' + lineOpacity + ';') + ('stroke-dasharray: ' + lineDasharray + ';') + ('stroke-linecap: ' + linecap));
 
-            svgEl.setAttribute("style", "width: 100%; " + "height: 100%; " + "top: 0; " + "left: 0; " + "bottom: 0; " + "right: 0; " + "position: absolute; ");
+            svgEl.setAttribute("style", "width: 100%; " + "min-height: 100%; " + ('height: ' + (lastPoint - firstPoint) + 'px;') + "top: 0; " + "left: 0; " + "bottom: 0; " + "right: 0; " + "position: absolute; ");
 
             svgParent.appendChild(svgEl);
         }
@@ -200,10 +240,9 @@ var Draad = function () {
     }, {
         key: 'init',
         value: function init() {
-            var _this = this;
+            var _this2 = this;
 
             this.connectingMagic(this.goThroughDots());
-
             var self = this;
 
             /**
@@ -211,7 +250,7 @@ var Draad = function () {
              */
             if (this.responsive === true) {
                 window.addEventListener('resize', function () {
-                    _this.resize(self);
+                    _this2.resize(self);
                 });
             }
         }
@@ -234,9 +273,9 @@ var Draad = function () {
     }, {
         key: 'destroyDraad',
         value: function destroyDraad() {
+            document.getElementsByClassName('draad-line--' + this.element)[0].remove();
             window.removeEventListener('resize', this.resize);
             this.options = {};
-            document.getElementsByClassName('draad-line--' + this.element)[0].remove();
         }
     }, {
         key: 'destroy',
