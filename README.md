@@ -54,8 +54,8 @@ element | string |   | 'class' | Enables elements connecting
 parentClass | string |   | 'class' | If not passed body will be parent of the SVG line
 offsetX | number | half of an element width | 20 | Enables more precise line positioning
 offsetY | number | half of an element height | 32 | Enables more precise line positioning 
-fill | string |  | #345adf | It will create contour
-color | string | #000 | #17f2a8 | Defines line color
+fill | string |  | '#345adf' | It will create contour
+color | string | '#000' | '#17f2a8' | Defines line color
 lineWidth | number | 1 | 12 | Defines line width in px
 lineOpacity | number | 1 | 0.6 | Defines line visibility
 dasharray | string |  | '5 4 5' | Transforms solid line to dashed
