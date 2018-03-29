@@ -1,10 +1,10 @@
 # Draad.js
 
-Simple javascript plugin without any dependencies.
+Simple javascript plugin without any dependencies. It helps with creating designs that contains something like __treasure hunt map__ or __timeline path.__
 
-This is plain JS ES6 script with babelized (ES5) version using Babel JS compiler.
+It is __plain JS__ (ES6) script with babelized (ES5) version using Babel JS compiler.
 
-When is called Draad.js will create an SVG element that connects all the elements with defined class and it will be by default located in the body. SVG parent can be changed via options. 
+When is called __Draad.js__ will create an SVG element that connects all the elements with defined class and it will be by default located in the body. SVG parent can be changed via options. 
  
 [NPM](#)
 [DEMO](#)
@@ -21,7 +21,7 @@ new Draad();
 const newDraad = new Draad('connectingElementClass');
 ```
 
-It needs unique class of the elements that needs to be connected 
+It __needs unique class__ for the elements that needs to be connected 
 
 ```HTML
 <span class="connectingElementClass"></span>
