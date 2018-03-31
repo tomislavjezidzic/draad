@@ -1,14 +1,26 @@
 {
-  "name": "draad-js",
+  "name": "draad",
   "version": "1.0.1",
-  "description": "Pure JS(ES6 and ES5) plugin for line(SVG) connecting elements in DOM.",
+  "description": "Pure JS (ES6 and ES5) plugin for line (SVG) connecting elements in DOM.",
+  "main": "src/Draad.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/tomislavjezidzic/draad"
   },
-  "keywords": [],
-  "author": "Tomislav Jezidžić",
+  "keywords": [
+    "connecting",
+    "elements",
+    "dots",
+    "svg",
+    "line",
+    "responsive",
+    "js",
+  ],
+  "author": "Tomislav Jezidžić <tjezidzic@outlook.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomislavjezidzic/draad/issues"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",

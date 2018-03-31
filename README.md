@@ -6,8 +6,10 @@ It is __plain JS__ (ES6) script with babelized (ES5) version using Babel JS comp
 
 When is called __Draad.js__ will create an SVG element that connects all the elements with defined class and it will be by default located in the body. SVG parent can be changed via __options.__ 
  
-__[NPM](#)__
+__[NPM](https://www.npmjs.com/package/draad)__ 
+
 __[DEMO 1](https://codepen.io/tjezidzic/full/wmmaYZ/)__
+ 
 __[DEMO 2](https://codepen.io/tjezidzic/full/dmmoWz/)__
 
 ## How to use
