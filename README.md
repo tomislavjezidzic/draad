@@ -4,10 +4,11 @@ Simple javascript plugin without any dependencies. It helps with creating design
 
 It is __plain JS__ (ES6) script with babelized (ES5) version using Babel JS compiler.
 
-When is called __Draad.js__ will create an SVG element that connects all the elements with defined class and it will be by default located in the body. SVG parent can be changed via options. 
+When is called __Draad.js__ will create an SVG element that connects all the elements with defined class and it will be by default located in the body. SVG parent can be changed via __options.__ 
  
-[NPM](#)
-[DEMO](#)
+__[NPM](#)__
+__[DEMO 1](https://codepen.io/tjezidzic/full/wmmaYZ/)__
+__[DEMO 2](https://codepen.io/tjezidzic/full/dmmoWz/)__
 
 ## How to use
 
@@ -62,7 +63,13 @@ dasharray | string |  | '5 4 5' | Transforms solid line to dashed
 cap | string |  | 'round' | It represents CSS property stroke-linecap
 responsive | boolean | false | true | Enables responsive line 
 wait | number | 0 | 1000 | It will wait with creating a line by defined milliseconds
-smoothing | number | 0.2 | 3.3 | It smoothes line curves and if 0 is passed line will be straight  
+smoothing | number | 0.2 | 3.3 | It smoothes line curves and if it's 0 passed the line will be straight with sharp edges 
+
+### Useful to know
+- connected elements needs to have same parent
+- connected elements don't needs to be in the same container
+- elements positioning is irrelevant
+- additional SVG styling and animating is possible because the line is just another element in DOM  
 
 ## License
 
