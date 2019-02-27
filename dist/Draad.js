@@ -46,8 +46,8 @@ var Draad = function () {
             offsetX: '',
             offsetY: '',
             fill: '',
-            color: '',
-            lineWidth: '',
+            color: '#000',
+            lineWidth: '1',
             lineOpacity: '',
             dasharray: '',
             cap: '',
@@ -95,9 +95,7 @@ var Draad = function () {
     _createClass(Draad, [{
         key: 'findAncestor',
         value: function findAncestor(element, cls) {
-            while ((element = element.parentElement) && element.classList.contains(cls)) {
-                return element;
-            }
+            return element.closest('.' + cls);
         }
 
         /**

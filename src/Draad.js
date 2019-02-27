@@ -76,9 +76,7 @@ export default class Draad {
      * @returns {*}
      */
     findAncestor(element, cls) {
-        while ((element = element.parentElement) && element.classList.contains(cls)) {
-            return element;
-        }
+        return element.closest('.' + cls);
     }
 
     /**
