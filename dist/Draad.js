@@ -32,6 +32,7 @@ var Draad = function () {
      * @param {string} options.cap
      * @param {boolean} options.responsive
      * @param {number} options.wait
+     * @param {boolean} options.absoluteUnits
      */
     function Draad(element) {
         var _this = this;
@@ -54,7 +55,8 @@ var Draad = function () {
             responsive: '',
             options: '',
             wait: 0,
-            smoothing: 0.2
+            smoothing: 0.2,
+            absoluteUnits: false
         };
 
         this.defaults = Object.assign({}, _defaults, options);
@@ -78,6 +80,7 @@ var Draad = function () {
         this.dasharray = this.defaults.dasharray;
         this.cap = this.defaults.cap;
         this.responsive = this.defaults.responsive;
+        this.absoluteUnits = this.defaults.absoluteUnits;
         this.options = this.defaults;
 
         setTimeout(function () {
@@ -130,8 +133,14 @@ var Draad = function () {
                     var _currentDot = document.getElementsByClassName(this.element)[_i];
                     var _sampleDotOffsetX = offsetX || _currentDot.offsetWidth / 2;
                     var _sampleDotOffsetY = offsetY || _currentDot.offsetHeight / 2;
+                    var _top = _currentDot.getBoundingClientRect().top + scrollTop - clientTop;
                     var _currentDotX = parseInt(_currentDot.offsetLeft + _sampleDotOffsetX, 10);
                     var _currentDotY = parseInt(_currentDot.offsetTop + _sampleDotOffsetY, 10);
+
+                    if (this.absoluteUnits === true) {
+                        _currentDotX = parseInt(_currentDot.getBoundingClientRect().left + _sampleDotOffsetX, 10);
+                        _currentDotY = parseInt(Math.round(_top) + _sampleDotOffsetY, 10);
+                    }
                     points.push([_currentDotX, _currentDotY]);
                 }
             }

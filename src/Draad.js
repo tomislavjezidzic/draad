@@ -22,6 +22,7 @@ export default class Draad {
      * @param {string} options.cap
      * @param {boolean} options.responsive
      * @param {number} options.wait
+     * @param {boolean} options.absoluteUnits
      */
     constructor(element, options = {}) {
 
@@ -40,6 +41,7 @@ export default class Draad {
             options: '',
             wait: 0,
             smoothing: 0.2,
+            absoluteUnits: false
         };
 
         this.defaults = Object.assign({}, _defaults, options);
@@ -63,6 +65,7 @@ export default class Draad {
         this.dasharray = this.defaults.dasharray;
         this.cap = this.defaults.cap;
         this.responsive = this.defaults.responsive;
+        this.absoluteUnits = this.defaults.absoluteUnits;
         this.options = this.defaults;
 
         setTimeout(() => {
@@ -108,8 +111,14 @@ export default class Draad {
                 let currentDot = document.getElementsByClassName(this.element)[i];
                 let sampleDotOffsetX = offsetX || currentDot.offsetWidth / 2;
                 let sampleDotOffsetY = offsetY || currentDot.offsetHeight / 2;
+                let top = currentDot.getBoundingClientRect().top + scrollTop - clientTop;
                 let currentDotX = parseInt(currentDot.offsetLeft + sampleDotOffsetX, 10);
                 let currentDotY = parseInt(currentDot.offsetTop + sampleDotOffsetY, 10);
+
+                if (this.absoluteUnits === true) {
+                    currentDotX = parseInt(currentDot.getBoundingClientRect().left + sampleDotOffsetX, 10);
+                    currentDotY = parseInt(Math.round(top) + sampleDotOffsetY, 10);
+                }
                 points.push([currentDotX, currentDotY]);
             }
         }

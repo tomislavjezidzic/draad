@@ -66,6 +66,7 @@ cap | string |  | 'round' | It represents CSS property stroke-linecap
 responsive | boolean | false | true | Enables responsive line 
 wait | number | 0 | 1000 | It will wait with creating a line by defined milliseconds
 smoothing | number | 0.2 | 3.3 | It smoothes line curves and if it's 0 passed the line will be straight with sharp edges 
+absoluteUnits | boolean | false | true | Coordinates can be absolute if parent without position: relative; is added   
 
 ### Useful to know
 - connected elements needs to have same parent
