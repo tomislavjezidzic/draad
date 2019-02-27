@@ -271,9 +271,11 @@ var Draad = function () {
     }, {
         key: 'destroyDraad',
         value: function destroyDraad() {
-            document.getElementsByClassName('draad-line--' + this.element)[0].remove();
-            window.removeEventListener('resize', this.resize);
-            this.options = {};
+            if (document.getElementsByClassName('draad-line--' + this.element)[0]) {
+                document.getElementsByClassName('draad-line--' + this.element)[0].remove();
+                window.removeEventListener('resize', this.resize);
+                this.options = {};
+            }
         }
     }, {
         key: 'destroy',

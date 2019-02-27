@@ -251,9 +251,11 @@ export default class Draad {
      * Draad instance destroy()
      */
     destroyDraad() {
-        document.getElementsByClassName(`draad-line--${this.element}`)[0].remove();
-        window.removeEventListener('resize', this.resize);
-        this.options = {};
+        if (document.getElementsByClassName(`draad-line--${this.element}`)[0]) {
+            document.getElementsByClassName(`draad-line--${this.element}`)[0].remove();
+            window.removeEventListener('resize', this.resize);
+            this.options = {};
+        }
     }
 
     get destroy() {
