@@ -252,8 +252,10 @@ export default class Draad {
      * Resize check
      */
     resize(self) {
-        document.getElementsByClassName(`draad-line--${self.element}`)[0].remove();
-        this.connectingMagic(self.goThroughDots());
+        if (document.getElementsByClassName(`draad-line--${self.element}`)[0]) {
+            document.getElementsByClassName(`draad-line--${self.element}`)[0].remove();
+            this.connectingMagic(self.goThroughDots());
+        }
     }
 
     /**
